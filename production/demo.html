@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Healthcare DEMO | HL7 Messages</title>
+
+    <!-- Bootstrap -->
+    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="../vendors/iCheck/skins/flat/green.css" rel="stylesheet">
+    <!-- bootstrap-progressbar -->
+    <link href="../vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="../vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
+    <!-- Select2 -->
+    <link href="../vendors/select2/dist/css/select2.min.css" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="../build/css/custom-demo.css" rel="stylesheet">
+  </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+
+        <!-- page content -->
+        <div class="right_col" role="main">
+
+            <!-- top tiles -->
+          <div class="row tile_count">
+            <table style="font-size:20pt;">
+                <tr>
+                    <td><img src="images/healthcare-logo.png" /></td>
+                    <td style="padding-left:10px;">Healthcare HL7 DEMO</td>
+                </tr>
+            </table>
+          </div>
+          <!-- /top tiles -->
+
+
+        <!-- Form Nuevo Paciente -->
+        <div class="clearfix"></div>
+
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Ingreso de Nuevo Paciente <small>Complete el formulario para crear un nuevo paciente</small></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="firstname">Nombres <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="firstname" name="firstname" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="familyname">Apellidos <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="familyname" name="familyname" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Número HIS <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="text" id="hisId" name="hisId" required="required" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                         <button id="button" type="button" class="btn btn-success">Ingresar</button>
+                        </div>
+                      </div>
+
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <!--Fin Form Nuevo Paciente -->
+
+        <br/>
+
+        <!-- Clinica, Laboratorio y Radiologia -->
+          <div class="row">
+
+            <!-- Clinica -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="x_panel tile ">
+
+                <div class="x_title">
+                  <h2>Clínica</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+
+                <div class="x_content">
+
+                    <div id="clinicDiv"/></div>
+
+                   
+
+                  <br />
+
+                    <div id="clinicone" style="display:none">
+                        <table>
+                                <tr>
+                                    <td width="120">HIS ID</td>
+                                    <td>&nbsp;<input type="text" name="clinichisId" id="clinichisId" class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                    <td width="120">Observación</td>
+                                    <td>&nbsp;<input type="text" name="observation" class="form-control"/></td>
+                                </tr>
+                                <tr>
+                                    <td>Agendar Examen:</td>
+                                    <td>&nbsp;
+                                            <select id="dept" class="form-control">
+                                            <!--<option value="laboratory">Laboratorio</option>-->
+                                            <option value="radiology">Radiología</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Detalle Examen:</td>
+                                    <td>&nbsp;<input type="textarea" name="testdetail" class="form-control" /></td>
+                                </tr>
+                                <tr>
+                                    <td rowspan="2"></td>
+                                    <td><br/>&nbsp;<button id="dotest" type="button" class="btn btn-success btn-xs">Agendar Examen</button></td>
+                                </tr>
+                        </table>
+                        <br/>
+                    </div>
+
+                  <div id="clinictwo" style="display:none">
+                    <table >
+                        <tr>
+                            <td valign="top" width="120">Prescripción:</td>
+                            <td>
+                                            <select id="interval" class="form-control">
+                                            <option value="QD">Diario</option>
+                                            <option value="QH">Cada una Hora</option>
+                                            <option value="BID">Dos veces al día</option>
+                                            <option value="HS">En la noche</option>
+                                            </select>
+                                            <BR/>
+                                            <select id="drugs" class="form-control">
+                                            <option value="LISINOPRIL">LISINOPRIL</option>
+                                            <option value="ISOTRETINOIN">ISOTRETINOIN</option>
+                                            <option value="METFORMIN">METFORMIN</option>
+                                            <option value="PREDNISONE">PREDNISONE</option>
+                                            </select>
+                            </td>
+                      </tr>
+                      <tr>
+                            <td></td>
+                            <td><br/>&nbsp;<button id="prescribe" type="button" class="btn btn-success btn-xs">Prescribir</button></td>
+                        </tr>
+                    </table>
+
+                    </div>
+                </div>
+              </div>
+            </div>
+            <!-- Fin Clinica -->
+
+            <!-- Laboratorio -->
+            <!--<div class="col-md-4 col-sm-4 col-xs-12">
+              <div class="x_panel tile  overflow_hidden">
+                <div class="x_title">
+                  <h2>Laboratorio</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <table class="" style="width:100%">
+
+                    <tr>
+                      <td>
+                          <div id="labDiv"/>
+                      </td>
+
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>-->
+            <!-- Fin Laboratorio -->
+
+            <!-- Radiología -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="x_panel tile ">
+                <div class="x_title">
+                  <h2>Radiología</h2>
+                  <ul class="nav navbar-right panel_toolbox">
+                    <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+                  </ul>
+                  <div class="clearfix"></div>
+                </div>
+                <div class="x_content">
+                  <table class="" style="width:100%">
+
+                    <tr>
+                      <td>
+                          <div id="radiologyDiv"/>
+                      </td>
+
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <!-- Fin Radiología -->
+
+          </div>
+
+          <!-- BD Usuarios -->
+          <div class="row">
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Base de Datos HIS</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Apellidos</th>
+                          <th>Nombres</th>
+                          <th>HIS ID</th>
+                          <th>Género</th>
+                        </tr>
+                      </thead>
+                      <tbody id="tablediv">
+
+
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+          <!-- Fin BD Usuarios -->
+
+          <!-- Farmacia -->
+              <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Farmacia</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    HIS ID: <input type="text" name="pharmacyhisId">
+                    <button id="pharmacybutton" type="button" class="btn btn-success btn-xs">Obtener Prescripción!</button>
+                    <BR/>
+                    <BR/>
+                    <table class="table" >
+                      <thead>
+                       <tr>
+                        <th>HIS ID</th>
+                        <th>Prescripción</th>
+                        <th>Intervalo</th>
+                       </tr>
+                      <thead>
+                      <tbody id="pharmacytablediv">
+                    </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+
+            </div>
+          <!-- Fin Farmacia -->
+
+          <!-- Log Mensajes -->
+          <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  <div class="x_title">
+                    <h2>Mensajes HL7</h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="x_content">
+                    
+
+                    <div >
+                        <ul class="to_do" id="esbMsgDiv">
+                          <li><p>Sin mensajes transmitidos aún...</p></li>
+                        </ul>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          <!-- Fin Log Mensajes -->
+
+
+
+
+
+
+          </div>
+        </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+          <div class="pull-right">
+            Healthcare HL7 DEMO by <a href="http://people.redhat.com/tgubelig">tgubeli</a>
+          </div>
+          <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+      </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="../vendors/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="../vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <script src="../vendors/fastclick/lib/fastclick.js"></script>
+    <!-- NProgress -->
+    <script src="../vendors/nprogress/nprogress.js"></script>
+
+    <!-- Custom Theme Scripts -->
+    <script src="../build/js/custom.min.js"></script>
+
+
+
+<script>
+
+    var HIS_CONSOLE_URL_BASE = "fusedemo.cloudapps.example.com";
+
+    var MAX_ESB_MSG_DISPLAY=6;
+    var MAX_CONSOLE_LINE_DISPLAY=6;
+
+    var clinicConsoleArray = [];
+    var labConsoleArray = [];
+    var radiologyConsoleArray = [];
+
+    var esbMsgArray = [];
+
+    $( "#button" ).button();
+    $( "#dotest" ).button();
+    $( "#prescribe" ).button();
+    $( "#pharmacybutton" ).button();
+
+
+    // Link to open the dialog
+    $( "#dialog-link" ).click(function( event ) {
+        $( "#dialog" ).dialog( "open" );
+        event.preventDefault();
+    });
+
+
+    // Hover states on the static widgets
+    $( "#dialog-link, #icons li" ).hover(
+        function() {
+            $( this ).addClass( "ui-state-hover" );
+        },
+        function() {
+            $( this ).removeClass( "ui-state-hover" );
+        }
+    );
+
+        $("#button").click(function(){
+
+            $.ajax({
+               type: "GET",
+               dataType: "jsonp",
+               url: "http://healthwebconsole-" + HIS_CONSOLE_URL_BASE + "/his/registry/"+$('input[name=firstname]').val()+"/"+$('input[name=familyname]').val()+"/"+$('input[name=hisId]').val(),
+               success: function(data){
+                 alert(data);
+                 
+               }
+
+            });
+            $('input[name=clinichisId]').val($('input[name=hisId]').val());
+            
+            setTimeout( populateTable(), 3000);
+            $("#clinicone").show();
+            $("#clinictwo").show();
+        });
+
+        $("#dotest").click(function(){
+            if($('input[name=hisId]').val() == null || $('input[name=hisId]').val() == ""){
+                alert('Must specify His ID');
+                return;
+            }
+
+            if($('input[name=testdetail]').val() == null || $('input[name=testdetail]').val() == ""){
+                alert('Specify Test details please!');
+                return;
+            }
+
+            if($('input[name=observation]').val() == null || $('input[name=observation]').val() == ""){
+                alert('Must enter observation detail before sending patient for more test!');
+                return;
+            }
+
+
+
+            $.ajax({
+               type: "GET",
+               dataType: "jsonp",
+               url: "http://healthwebconsole-" + HIS_CONSOLE_URL_BASE + "/his/dotest/"+$('input[name=hisId]').val()+"/"+$( "#dept option:selected" ).val()+"/"+$('input[name=testdetail]').val()+"/"+$('input[name=observation]').val(),
+               success: function(data){
+                 alert(data);
+                   connect();
+               }
+
+            });
+        });
+
+        $("#prescribe").click(function(){
+
+            $.ajax({
+               type: "GET",
+               dataType: "jsonp",
+               url: "http://healthwebconsole-" + HIS_CONSOLE_URL_BASE + "/his/prescribe/"+$('input[name=hisId]').val()+"/"+$('#interval option:selected').val()+"/"+$('#drugs option:selected').val(),
+               success: function(data){
+                 alert(data);
+               }
+
+            });
+            alert($('#drugs option:selected').val() + " prescrita!");
+        });
+
+        $("#pharmacybutton").click(function(){
+
+            populatePharmacyTable($('input[name=pharmacyhisId]').val());
+        });
+
+
+    $(document).ready(function() {
+
+        // carga tabla de pacientes HIS
+        populateTable();
+
+        if(!("WebSocket" in window)){
+            $('#chatLog, input, button, #examples').fadeOut("fast");
+            $('<p>Oh no, you need a browser that supports WebSockets. How about <a href="http://www.google.com/chrome">Google Chrome</a>?</p>').appendTo('#container');
+        }else{
+
+            connect();
+
+        }
+
+
+    });
+    
+    function connect(){
+        try{
+
+                //##Displaying messaging in Clinic Console
+                /*var clinicsocket = new WebSocket("ws://clinicservice-" + HIS_CONSOLE_URL_BASE + "/demo");
+                clinicsocket.onopen = function(){ clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');}
+                clinicsocket.onmessage = function(msg){clinicMessage('Patient===> '+msg.data+' admitted!');}
+                clinicsocket.onclose = function(){clinicMessage('Clinic System shutdown...');}*/
+                
+                //clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');
+                /*function clinicMessage(msg){$('#clinicDiv').html(message(clinicConsoleArray,msg));}*/
+
+                //##Displaying messaging in Laboratory Console
+                /*var labsocket = new WebSocket("ws://laboratoryservice-" + HIS_CONSOLE_URL_BASE + "/demo");
+                labsocket.onopen = function(){ labMessage('Starting Laboratory System Simulator v 1.4.0 ......');}
+                labsocket.onmessage = function(msg){labMessage(msg.data);}
+                labsocket.onclose = function(){labMessage('Laboratory System shutdown...');}*/
+//                labMessage('Starting Laboratory System Simulator v 1.4.0 ......');
+                /*function labMessage(msg){$('#labDiv').html(message(labConsoleArray,msg));}*/
+
+                //##Displaying messaging in Radiology Console
+                var radiologysocket = new WebSocket("ws://radiologyservice-" + HIS_CONSOLE_URL_BASE + "/demo");
+                radiologysocket.onopen = function(){ radiologyMessage('Starting Radiology System Simulator v 2.0.5 ......');}
+                radiologysocket.onmessage = function(msg){radiologyMessage('Patient '+msg.data);}
+                radiologysocket.onclose = function(){radiologyMessage('Radiology System shutdown...');}
+            function radiologyMessage(msg){$('#radiologyDiv').html(message(radiologyConsoleArray,msg));}
+
+            //##Connect to ESB Message
+            var esbmsgsocket = new WebSocket("ws://hisesb-" + HIS_CONSOLE_URL_BASE + "/demo");
+                esbmsgsocket.onopen = function(){console.log('Starting getting ESB messages ......');}
+
+                esbmsgsocket.onmessage = function(msg){
+                    esbMsgArray.push(createESBMsg(msg.data));
+                    if(esbMsgArray.length > MAX_ESB_MSG_DISPLAY){
+                        esbMsgArray.shift();
+                    }
+
+                    var msgContent="";
+                    for (i = 0; i < esbMsgArray.length; i++) {
+                        msgContent += esbMsgArray[i];
+                    }
+
+                    $('#esbMsgDiv').html(msgContent);
+                }
+
+                esbmsgsocket.onclose = function(){console.log('Stop getting ESB messages');}
+
+
+            } catch(exception){clinicMessage('Error:'+exception);}
+
+
+                function message(consoleArray, msg){
+                    consoleArray.push(msg);
+
+                    if(consoleArray.length > MAX_CONSOLE_LINE_DISPLAY){
+                        consoleArray.shift();
+                    }
+
+                    var msgContent="";
+                    for (i = 0; i < consoleArray.length; i++) {
+
+                        msgContent += consoleArray[i]+"<br/> ";
+
+                    }
+
+                    return msgContent;
+                }
+
+                function createESBMsg(msg){
+                    var msgcontent='<li><p><strong>Mensaje transmitido : </strong>"';
+                    msgcontent += msg;
+                    msgcontent += '</p></li>';
+
+                    return msgcontent;
+                }
+            }
+
+    function populateTable() {
+
+        var tableContent = '';
+
+
+        $.get( 'http://healthwebconsole-' + HIS_CONSOLE_URL_BASE + '/his/allpatients', function( data ) {
+                    var lineByline = data.split('\n');
+            $.each(lineByline , function(index,value){
+
+                    if(value == null || value == ""){
+                        return;
+                    }
+                tableContent += '<tr>';
+
+                            var tabBytab = value.split('\t');
+                            $.each(tabBytab , function(indext,valuet){
+                                if(valuet != null || valuet != "")
+                                 tableContent += '<td>' + valuet + '</td>';
+                            });
+
+
+                tableContent += '</tr>';
+            });
+
+
+            $('#tablediv').html(tableContent);
+        });
+    };
+
+    function populatePharmacyTable(pharmacyhisid) {
+
+        var tableContent = '';
+          var pharmacyUrl = 'http://healthwebconsole-' + HIS_CONSOLE_URL_BASE + '/his/pharmacy/'+pharmacyhisid;
+
+
+            if("" == pharmacyhisid){
+                alert('Please enter HIS ID in the Pharmacy section!');
+                return;
+            }else{
+
+            $.get(pharmacyUrl, function( data ) {
+
+                        if(""== data){
+                            alert('No se encontraron Prescripciones para el HIS ID: '+pharmacyhisid);
+                        }else{
+                      var lineByline = data.split('\n');
+                    $.each(lineByline , function(index,value){
+
+                        tableContent += '<tr>';
+
+                                    var tabBytab = value.split('\t');
+                                    $.each(tabBytab , function(indext,valuet){
+                                         tableContent += '<td>' + valuet + '</td>';
+                                    });
+
+
+                        tableContent += '</tr>';
+                    });
+                }
+
+
+                $('#pharmacytablediv').html(tableContent);
+            });
+          }
+    };
+
+</script>
+
+  </body>
+</html>

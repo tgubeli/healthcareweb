@@ -140,7 +140,7 @@
                                     <td>Agendar Examen:</td>
                                     <td>&nbsp;
                                             <select id="dept" class="form-control">
-                                            <!--<option value="laboratory">Laboratorio</option>-->
+                                            <option value="laboratory">Laboratorio</option>
                                             <option value="radiology">Radiología</option>
                                         </select>
                                     </td>
@@ -190,7 +190,7 @@
             <!-- Fin Clinica -->
 
             <!-- Laboratorio -->
-            <!--<div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-4 col-sm-4 col-xs-12">
               <div class="x_panel tile  overflow_hidden">
                 <div class="x_title">
                   <h2>Laboratorio</h2>
@@ -211,7 +211,7 @@
                   </table>
                 </div>
               </div>
-            </div>-->
+            </div>
             <!-- Fin Laboratorio -->
 
             <!-- Radiología -->
@@ -495,31 +495,31 @@
         try{
 
                 //##Displaying messaging in Clinic Console
-                /*var clinicsocket = new WebSocket("ws://clinicservice-" + HIS_CONSOLE_URL_BASE + "/demo");
+                var clinicsocket = new WebSocket("ws://clinicws-" + HIS_CONSOLE_URL_BASE + "/demo");
                 clinicsocket.onopen = function(){ clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');}
                 clinicsocket.onmessage = function(msg){clinicMessage('Patient===> '+msg.data+' admitted!');}
-                clinicsocket.onclose = function(){clinicMessage('Clinic System shutdown...');}*/
+                clinicsocket.onclose = function(){clinicMessage('Clinic System shutdown...');}
                 
-                //clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');
-                /*function clinicMessage(msg){$('#clinicDiv').html(message(clinicConsoleArray,msg));}*/
+                clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');
+                function clinicMessage(msg){$('#clinicDiv').html(message(clinicConsoleArray,msg));}
 
                 //##Displaying messaging in Laboratory Console
-                /*var labsocket = new WebSocket("ws://laboratoryservice-" + HIS_CONSOLE_URL_BASE + "/demo");
+                var labsocket = new WebSocket("ws://laboratoryws-" + HIS_CONSOLE_URL_BASE + "/demo");
                 labsocket.onopen = function(){ labMessage('Starting Laboratory System Simulator v 1.4.0 ......');}
                 labsocket.onmessage = function(msg){labMessage(msg.data);}
-                labsocket.onclose = function(){labMessage('Laboratory System shutdown...');}*/
-//                labMessage('Starting Laboratory System Simulator v 1.4.0 ......');
-                /*function labMessage(msg){$('#labDiv').html(message(labConsoleArray,msg));}*/
+                labsocket.onclose = function(){labMessage('Laboratory System shutdown...');}
+                labMessage('Starting Laboratory System Simulator v 1.4.0 ......');
+                function labMessage(msg){$('#labDiv').html(message(labConsoleArray,msg));}
 
                 //##Displaying messaging in Radiology Console
                 var radiologysocket = new WebSocket("ws://radiologyservice-" + HIS_CONSOLE_URL_BASE + "/demo");
                 radiologysocket.onopen = function(){ radiologyMessage('Starting Radiology System Simulator v 2.0.5 ......');}
                 radiologysocket.onmessage = function(msg){radiologyMessage('Patient '+msg.data);}
                 radiologysocket.onclose = function(){radiologyMessage('Radiology System shutdown...');}
-            function radiologyMessage(msg){$('#radiologyDiv').html(message(radiologyConsoleArray,msg));}
+                function radiologyMessage(msg){$('#radiologyDiv').html(message(radiologyConsoleArray,msg));}
 
             //##Connect to ESB Message
-            var esbmsgsocket = new WebSocket("ws://hisesb-" + HIS_CONSOLE_URL_BASE + "/demo");
+            var esbmsgsocket = new WebSocket("ws://hisesbws-" + HIS_CONSOLE_URL_BASE + "/demo");
                 esbmsgsocket.onopen = function(){console.log('Starting getting ESB messages ......');}
 
                 esbmsgsocket.onmessage = function(msg){

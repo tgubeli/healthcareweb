@@ -375,14 +375,14 @@ $(document).ready(function() {
     try{
 
 			//##Displaying messaging in Clinic Console
-			var clinicsocket = new WebSocket("ws://clinicservice-fusedemo.apps.scjocp3-a9fc.open.redhat.com/demo");
+			var clinicsocket = new WebSocket("ws://clinicws-fusedemo.apps.scjocp3-a9fc.open.redhat.com/demo");
 			clinicsocket.onopen = function(){ clinicMessage('Starting Clinic System Simulator v 1.0.0 ......');}
 			clinicsocket.onmessage = function(msg){clinicMessage('Patient===> '+msg.data+' admitted!');}
 			clinicsocket.onclose = function(){clinicMessage('Clinic System shutdown...');}
     	function clinicMessage(msg){$('#clinicDiv').html(message(clinicConsoleArray,msg));}
 
 			//##Displaying messaging in Laboratory Console
-			var labsocket = new WebSocket("ws://laboratoryservice-fusedemo.apps.scjocp3-a9fc.open.redhat.com/demo");
+			var labsocket = new WebSocket("ws://laboratoryws-fusedemo.apps.scjocp3-a9fc.open.redhat.com/demo");
 			labsocket.onopen = function(){ labMessage('Starting Laboratory System Simulator v 1.4.0 ......');}
 			labsocket.onmessage = function(msg){labMessage(msg.data);}
 			labsocket.onclose = function(){labMessage('Laboratory System shutdown...');}
@@ -396,7 +396,7 @@ $(document).ready(function() {
     	function radiologyMessage(msg){$('#radiologyDiv').html(message(radiologyConsoleArray,msg));}
     	
     	//##Connect to ESB Message 
-    	var esbmsgsocket = new WebSocket("ws://hisesb-fusedemo.apps.scjocp3-a9fc.open.redhat.com/demo");
+    	var esbmsgsocket = new WebSocket("ws://hisesbws-fusedemo.apps.scjocp3-a9fc.open.redhat.com/demo");
 			esbmsgsocket.onopen = function(){console.log('Starting getting ESB messages ......');}
 			
 			esbmsgsocket.onmessage = function(msg){
